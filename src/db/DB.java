@@ -12,20 +12,19 @@ import java.util.Properties;
 public class DB {
 
 	private static Connection conn = null;
-	
 	public static Connection getConnection() {
-		if (conn == null) {
-			try {
-				Properties props = loadProperties();
-				String url = props.getProperty("dburl");
-				conn = DriverManager.getConnection(url, props);
-			}
-			catch (SQLException e) {
-				throw new DbException(e.getMessage());
-			}
-		}
-		return conn;
+	    if (conn == null) {
+	        try {
+	            String url = "jdbc:mysql://localhost:3306/coursejdbc?user=root&password=1234567&allowPublicKeyRetrieval=true&useSSL=false";
+	            conn = DriverManager.getConnection(url);
+	        }
+	        catch (SQLException e) {
+	            throw new DbException(e.getMessage());
+	        }
+	    }
+	    return conn;
 	}
+
 	
 	public static void closeConnection() {
 		if (conn != null) {
